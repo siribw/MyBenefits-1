@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "MyBenefits",
+    "slug": "MyBenefits-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/MyBenefitsLogo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/loading.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#202a44"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/MyBenefitsLogo.png",
+        "backgroundColor": "#202a44"
+      }
+    },
+    "web": {
+      "favicon": "./assets/MyBenefitsLogo.png"
+    }
+  }
+}
