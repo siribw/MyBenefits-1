@@ -15,7 +15,7 @@ import {
   import Colors from "../color";
   import Rating from "./Rating";
   import { useNavigation } from "@react-navigation/native";
-  import Globalstyles from '../Globalstyle'
+  import Globalstyles from '../Globalstyle';
   
   function HomeEvents() {
     const navigation = useNavigation();

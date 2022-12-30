@@ -20,7 +20,7 @@ const firebaseConfig = {
   projectId: "innovation-cbs",
   storageBucket: "innovation-cbs.appspot.com",
   messagingSenderId: "861858962246",
-  appId: "1:861858962246:web:98c4906043fc4d2d9ce347"
+  appId: "1:861858962246:web:ef64275971446e3e9ce347"
 };
 
 export default function App() {
