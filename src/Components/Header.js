@@ -36,12 +36,12 @@ export default function HeaderComponent() {
             width: 300,
             alignSelf: 'center',
           }}></Image>
-        <Text style ={Globalstyles.text2} > Welcome {firebase.auth().currentUser.email}!</Text>
+        
        
   
        
     </View>  
       )
-}
+}//<Text style ={Globalstyles.text2} > Welcome {firebase.auth().currentUser.email}!</Text>
 
 

@@ -9,6 +9,7 @@ import Health from '../Components/Categories/Health'
 import FoodDrinks from '../Components/Categories/FoodDrinks'
 import Insurance from '../Components/Categories/Insurance'
 import HomeEvents from "../Components/HomeEvents";
+import Eventssite from "../Components/Categories/eventsite";
 
 const Stack = createNativeStackNavigator();
 const StackNav = () => {
@@ -27,6 +28,7 @@ const StackNav = () => {
       <Stack.Screen name="Health" component={Health} />
       <Stack.Screen name="FoodDrinks" component={FoodDrinks} />
       <Stack.Screen name="Insurance" component={Insurance} />
+      <Stack.Screen name="Eventssite" component={Eventssite} />
 
     </Stack.Navigator>
   );

@@ -30,8 +30,11 @@ function ProfileScreen () {
     //og vi stiller en knap til rådighed, der kan logge brugeren ud
     return (
         < >
-        <Header/>
-        
+    <Image source = {require('../../assets/contrastlogo.png')}   
+                    h = {200}
+                    w = {"full"}
+                    alt = 'none'
+                    />
         
         <Tabs />
         <View>

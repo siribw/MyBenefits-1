@@ -4,11 +4,13 @@ import {Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeProducts from "../Components/HomeProducts";
 import HomeEvents from "../Components/HomeEvents";
-import Fashion from '../Components/Categories/Fashion'
-import Health from '../Components/Categories/Health'
-import Header from '../Components/Header'
-import Globalstyles from '../Globalstyle'
+import Fashion from '../Components/Categories/Fashion';
+import Health from '../Components/Categories/Health';
+import Header from '../Components/Header';
+import Globalstyles from '../Globalstyle';
 import { useNavigation } from "@react-navigation/native";
+import Eventssite from "../Components/Categories/eventsite";
+
 
 
 
@@ -73,7 +75,7 @@ function HomeScreen() {
           borderWidth: 0,
           borderRadius: 10,
           padding: 10,
-          margin: 2}} title = 'Events'  onPress={() => navigation.navigate("HomeEvents")} ><Text style={Globalstyles.text2}>
+          margin: 2}} title = 'Events'  onPress={() => navigation.navigate("Eventssite")} ><Text style={Globalstyles.text2}>
 
           Events</Text></Pressable>
 
