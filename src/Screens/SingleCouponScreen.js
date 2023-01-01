@@ -21,33 +21,27 @@ import Globalstyles from "../Globalstyle";
 //generate random coupon
 //inspo fra https://www.programiz.com/javascript/examples/generate-random-strings 
 const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-function functionOne(){
-  // do something
-};
-  
-
-
+//generer en tilfældig string af kombination af ovenstående string
 function generateString(length) {
   let result = ' ';
   const charactersLength = characters.length;
   for ( let i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
 } return result};
-
-function functionCombined() {
-  functionOne();
+//vi sætter newcoupon funktionen til at genere en 7 lang string der 
+//kommer op som en alert når funktionen køres 
+function newCoupon() {
   Alert.alert(generateString(7));
 };
 
   function SingleCouponScreen({ route }) {
-    const [value, setValue] = useState(0);
-    const navigation = useNavigation();
     const coupon = route.params;
   
  
   return (
-    
+    //Box giver pænt layout til kupon
+    //vi fremviser rabattens billede, navn på forretning, dens rating, description
+    //nederst indsætter vi review komponent så man kan skrive et review
     <Box safeArea flex={1} bg={Colors.white}>
       <ScrollView px={5} showsVerticalScrollIndicator={false}>
         <Image
@@ -70,7 +64,7 @@ function functionCombined() {
           {coupon.description}
         </Text>
         <Button 
-          onPress={() => functionCombined()}
+          onPress={() => newCoupon()}
           style ={Globalstyles.button}
       
         >
@@ -83,5 +77,5 @@ function functionCombined() {
   
   );
 }
-
+//eksporter komponent
 export default SingleCouponScreen;

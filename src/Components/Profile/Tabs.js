@@ -6,7 +6,12 @@ import Colors from "../../color";
 import { Text } from "native-base";
 import BenefitsUsed from "./BenefitsUsed";
 import Globalstyle from "../../Globalstyle"
-//Her muliggør vi at man kan se hvilke benefits man har brugt på profilsiden
+
+//Tabs er det der gør at vi kan swipe mellem de to forskellige sider på profil siden.
+//vi danner to renderScenes på baggrund af de to .js filer vi har lavet; BenefitsUsed og Profile
+//Vi danner en tab bar som har to knapper der hedder Profil og Benefits used
+//TabView samler alle elementerne for at tabbar kan fungere, og henter routerne som skal bruges til navigering mellem de to scener
+
 const renderScene = SceneMap({
   first: Profile,
   second: BenefitsUsed,

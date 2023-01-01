@@ -3,7 +3,7 @@ import React from "react";
 import { Pressable } from "react-native";
 import Colors from "../../color";
 
-//liste over anvendte fordele (fiktivt)
+//liste over anvendte fordele (hardcoded data)
 
 const BenefitsUsed = () => {
   return (

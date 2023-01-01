@@ -12,15 +12,23 @@ import {
   import React, { useState } from "react";
   import Colors from "../color";
   import Rating from "../Components/Rating";
-  import NumericInput from "react-native-numeric-input";
   import Review from "../Components/Review";
   import { useNavigation } from "@react-navigation/native";
   
+  //enkelt eventside
+  //er sat op som singecoupon side og derfor skrives coupon istedet for event
+
+  //input route bestemmer hvilket event der vises 
+  //vi kan trække dets paramentre som refererer tilbage til db
   function SingleEventScreen({ route }) {
     const [value, setValue] = useState(0);
     const navigation = useNavigation();
     const coupon = route.params;
     return (
+
+      //Box giver pænt layout til event
+      //vi fremviser eventets billede fra json database, navn på event, dens rating, description
+      //nederst indsætter vi review komponent så man kan skrive et review
       <Box safeArea flex={1} bg={Colors.white}>
         <ScrollView px={5} showsVerticalScrollIndicator={false}>
           <Image

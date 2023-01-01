@@ -11,18 +11,23 @@ import Globalstyles from '../Globalstyle';
 
 
   function LoginScreen({ navigation }) {
+    //Vi bruge useState hooks til at sætte react værdier i funktionerne på siden
+    //De holder på værdierne vi sætter 
 
-    // Deklarerer nye state variable, som vi kalder email, password og errorMessage
-    //Vi bruge useState, som er et Hook, der lader os tilføje React state til funktionskomponenter.
-    // vi kan dermed bevare værdierne imellem funktionernes kørsel
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(null)
 
-    /*Promise håndterer login af eksisterende bruger med firebase-metoden, signInWithEmailAndPassword, 
-    der tager mail-adresse og kodeord som argumenter. Asynkront eksekveres login i firebase.  
-    I catch sørger vi får at håntere fejl ved at sætte værdien for vores ovenstående state-variabel, errorMessage
-    */
+     //vi skaber en knap der håndterer når vi submitter et sign in 
+        //kører funktionen handlesubmit
+        //den loades under inputfelterne i view
+    const renderButton = () => {
+        return <Button style= {Globalstyles.button} onPress={() => handleSubmit() } title="Login" />;
+    };
+
+
+    //handleSubmit er en asynk. funktion der skal bruger firebase funktion til at signe en bruger ind
+    //hvis ikke det lykkedes sender den en fejlmeddelse
     const handleSubmit = async () => {
         navigation.navigate("Bottom")
         try {
@@ -34,14 +39,10 @@ import Globalstyles from '../Globalstyle';
         }
     }
 
-    //Her defineres loginknappen, som aktiverer handleSubmit med onPress
-    const renderButton = () => {
-        return <Button style= {Globalstyles.button} onPress={() => handleSubmit() } title="Login" />;
-    };
-
-//Under teksten 'Login', har vi to TextInputs, der ved ændring af værdien af konstanterne, email og password, 
-//sender den nye værdi som argument til call back funktionen, som sætter værdien i email og password.
-// Hvis errorMessage får fastsat en værdi, skal denne udskrives i en tekstkomponent.
+    
+    
+    //view består af to inputfelter til email og psw som bruges til handlesubmit
+    //under den er en knap til registerScreen hvor man kan oprette en bruger hvis man ikke har en
     return (
         <View style={Globalstyles.container}>
             <Image source = {require('../../assets/contrastlogo.png')}
@@ -79,5 +80,5 @@ import Globalstyles from '../Globalstyle';
 }
 
 
-//Eksport af Loginform, således denne kan importeres og benyttes i andre komponenter
+//Eksporterer komponent
 export default LoginScreen

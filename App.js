@@ -4,13 +4,9 @@ import { NativeBaseProvider, StatusBar } from "native-base";
 import LoginScreen from "./src/Screens/LoginScreen";
 import RegisterScreen from "./src/Screens/RegisterScreen";
 import BottomNav from "./src/Navigations/BottomNav";
-import Fashion from './src/Components/Categories/Fashion'
-import Health from './src/Components/Categories/Health'
-
 
 import React, {useState, useEffect} from 'react';
 import firebase from "firebase/compat";
-import HomeScreen from './src/Screens/HomeScreen'
 import Globalstyles from "./src/Globalstyle";
 
 // Your web app's Firebase configuration
@@ -33,8 +29,7 @@ export default function App() {
         firebase.initializeApp(firebaseConfig);
         }
 
-    //Firebase-metoden, onAuthstatechanged, observerer hvorvidt brugeren er logget ind eller ud
-    //Pba. brugerens status foretages et callback med setUSer metoden, som håndterer user-state variablens status.
+        //firebase funktion der holde øjemed om brugeren er logget und og hvis ikke smider brugeren ud
         function onAuthStateChange(callback) {
             return firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -47,8 +42,7 @@ export default function App() {
         });
     }
 
-  //Med useEffect-hooket begynder vi at lytte til ændringer i auth state
-  //På den måde kan vi se om brugeren er aktiv. 
+  //useeffekt holder øje med om brugeren er logget ind
   useEffect(() => {
     const unsubscribe = onAuthStateChange(setUser);
     return () => {
@@ -65,15 +59,17 @@ const GuestPage = () => {
     <NativeBaseProvider style={Globalstyles.container}>
       <NavigationContainer >
         <StatusBar hidden={true} />
+        {/*login siden er ligesom vores start side*/}
         <Stack.Navigator
           initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}
         >
+          {/* Stack screen bruger vi til at kunne swipe mellem siderne og ud fra appen/bottomNav */}
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Bottom" component={BottomNav} />
+          <Stack.Screen name="Bottom" component={BottomNav}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

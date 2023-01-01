@@ -5,8 +5,6 @@ import Tabs from "../Components/Profile/Tabs";
 import {View,Button, StyleSheet, } from 'react-native';
 import firebase from "firebase/compat";
 import { useNavigation } from "@react-navigation/native";
-import Header from '../Components/Header'
-import Globalstyles from "../Globalstyle";
 
 
 
@@ -15,19 +13,19 @@ import Globalstyles from "../Globalstyle";
 function ProfileScreen () {
         const navigation = useNavigation();
 
-    //Firebase-metoden, handleLogout, håndterer log ud af en bruger, der er logget ind. Asynkron funktion
+    //logout funktion som er lavet med prædefineret firebase funktion
     const handleLogOut = async () => {
         await firebase.auth().signOut();
 
     }
 
-    //Hvis den aktive bruger ikke kan findes, fortæller vi det i et tekstkomponent
+    //Hvis den aktive bruger ikke kan findes skrives en tekst
     if (!firebase.auth().currentUser) {
         return <View><Text>Not found</Text></View>;
     }
 
-    //I return() hentes billede af sketch til Profil-siden, 
-    //og vi stiller en knap til rådighed, der kan logge brugeren ud
+    //i return loades profil ind som en tab der hentes i tabs komponenten
+    //nederst er log ud knappen
     return (
         < >
     <Image source = {require('../../assets/contrastlogo.png')}   
@@ -37,8 +35,7 @@ function ProfileScreen () {
                     />
         
         <Tabs />
-        <View>
-        {/*<Text>Current user: {firebase.auth().currentUser.email}</Text> */}       
+        <View>   
             <Button color = 'red' onPress={() => handleLogOut() && navigation.navigate('Login')} title="Log out" />
         </View>
       
@@ -51,6 +48,6 @@ function ProfileScreen () {
 
 
 
-//Eksport af Loginform, således denne kan importeres og benyttes i andre komponenter
+//Eksport af komponent
 export default ProfileScreen
 

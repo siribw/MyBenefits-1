@@ -9,7 +9,7 @@ import MapsScreen from '../Screens/MapsScreen'
 import AdminScreen from '../Screens/AdminScreen'
 
 import StackNav from "./StackNav";
-
+//nedenstående er vores bottom navigator knapper
 const Tab = createBottomTabNavigator();
 const BottomNav = () => {
   return (
@@ -88,4 +88,5 @@ const styles = StyleSheet.create({
   },
 });
 
+//eksporterer komponent
 export default BottomNav;

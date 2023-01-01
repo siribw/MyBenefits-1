@@ -1,20 +1,23 @@
 import React from 'react';
-import {StatusBar} from "expo-status-bar";
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native';
-import { LineChart, PieChart, ContributionGraph, StackedBarChart, BarChart }
-    from "react-native-chart-kit";
-
-import Header from '../Components/Header';
+import { Text, Dimensions, ScrollView, Image } from 'react-native';
+import { PieChart, BarChart } from "react-native-chart-kit";
 import Globalstyles from '../Globalstyle';
 
 //fra følgende side: https://github.com/indiespirit/react-native-chart-kit
 
-//Det her er adminstratorsiden
+//Adminstratorsiden/HR siden med statistik
+//procenttallene er hardcodede ind i statistikkernes værdier
 function AdminScreenComponent () {
+    //finder skærmdimensionerne fra telefonen 
     const screenWidth = Dimensions.get("window").width;
+
+    //trækker 5% fra da dette var den bedste metode til at sætte margin på graferne
+    //uden at de blev skæve eller asymmetriske
     const altScreenWidt = screenWidth - (screenWidth*0.05);
+
     return(
             <ScrollView style={Globalstyles.container2}>
+                {/*Logo */}
                 <Image source = {require('../../assets/contrastlogo.png')}   style={{
                     resizeMode: "cover",
                     height: 200,
@@ -25,7 +28,7 @@ function AdminScreenComponent () {
 
                 <Text style={Globalstyles.header3}>Most used category</Text>
                 <PieChart 
-                    //Piechart viser hvilke kategorier der er brugt mest af
+                    //Cirkeldiagram viser hvilke kategorier der er brugt mest af
                           data={[
                               {
                                   name: "% Insurance ",
@@ -61,16 +64,14 @@ function AdminScreenComponent () {
                           height={200}
                           accessor={"population"}
                           backgroundColor={"#166D99"}
-                          
-                      
                           center={[20, 1]}
                           chartConfig={{
-                              color: (opacity = 1) => `rgb(0, 119, 182)`,
+                              color: (opacity = 1) => `rgb(0, 119, 182)`, //farve props RGB
                               strokeWidth: 2,
                               useShadowColorFromDataset: false,
-                             
                           }}
-                          bezier
+                        
+                          bezier //bruges til at lave buede kanter rundt om grafen og placere den pænt
                            style={{
                             paddingLeft: 10,
                              marginVertical: 8,
@@ -100,19 +101,15 @@ function AdminScreenComponent () {
                                 backgroundColor: '#FFFFFF',
                                 backgroundGradientFrom: '#C4E6F7',
                                 backgroundGradientTo: '#166D99',
-                               decimalPlaces: 0, // optional, defaults to 2dp
-                               color: (opacity = 1) => `#FFFFFF`,
-                               
-                              
-
-                           }} bezier
-                           style={{
+                                decimalPlaces: 0, // optional, defaults to 2dp
+                                color: (opacity = 1) => `#FFFFFF`,
+                            }} bezier //bruges til at lave buede kanter rundt om grafen og placere den pænt
+                             style={{
                              paddingLeft: 10,
                              marginVertical: 8,
                              borderRadius: 20
-                           }}absolute
-                    //bezier laver linjerne kurvet
-            
+                            }}absolute
+
                 />
 
 
@@ -120,7 +117,7 @@ function AdminScreenComponent () {
             </ScrollView>
     )
 }
-
+//eksporterer komponent
 export default AdminScreenComponent;
 
 

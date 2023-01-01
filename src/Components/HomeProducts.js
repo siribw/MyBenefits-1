@@ -1,13 +1,10 @@
 import {
   Box,
-  FlatList,
-  Flex,
   Heading,
   Image,
   Pressable,
   ScrollView,
   Text,
-  Header,
   View
 } from "native-base";
 import React from "react";
@@ -17,18 +14,20 @@ import Rating from "./Rating";
 import { useNavigation } from "@react-navigation/native";
 import Globalstyles from "../Globalstyle";
 
+//viser en liste af coupons på Home siden 
+
 function HomeCoupons() {
   const navigation = useNavigation();
   
   return(
     <View>
+      {/* header */}
       <Text style={Globalstyles.header2}>My coupons</Text>
-    
-
-
-    <ScrollView flex={1} horizontal={true} centerContent={true}>
+      {/* vi sætter horizontal=true for at få view til at scrolle vandret istedet for vertikalt */}
+      <ScrollView flex={1} horizontal={true} centerContent={true}>
       
-
+        {/* returnerer et array af coupons der stilles op som pressables boxes, med billede og titel */}
+        {/*når man klikker på dem bliver man vist til rabattens egen side hvor man kan hente en kode */}
         {coupons.map((coupon) => (
           <Pressable
             onPress={() => navigation.navigate("SingleCoupon", coupon)}
@@ -68,5 +67,5 @@ function HomeCoupons() {
     </View>
   )
 }
-
+//eksporterer komponent
 export default HomeCoupons;

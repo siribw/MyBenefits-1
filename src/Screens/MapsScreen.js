@@ -7,26 +7,19 @@ import {Accuracy} from "expo-location";
 import {useState, useEffect} from "react";
 import HeaderComponent from '../Components/Header';
 
-//
-function App() {
-
-  //Deklarerer nye state variable
-    //Vi bruge useState, som er et Hook, der lader os tilføje React state til funktionskomponenter.
-    // vi kan dermed bevare værdierne imellem funktionernes kørsel
+//maps side 
+function MapComponent() {
+  //Vi bruge useState hooks til at sætte react værdier i funktionerne på siden
+  //De holder på værdierne vi sætter 
   const [hasLocationPermission, setlocationPermission] = useState(false)
   const [currentLocation, setCurrentLocation] = useState(null)
   const [userMarkerCoordinates, setUserMarkerCoordinates] = useState([])
   const [selectedCoordinate, setSelectedCoordinate] = useState(null)
   const [selectedAddress, setSelectedAddress] = useState(null)
 
-  /* Vi skal nu have brugerens tilladelse til at bruge enhedens lokation. 
-  * Til dette bruges getLocationPermission, der med den asynkrone metode requestForegroundPermissionsAsync,
-  * aktiverer en anmodning om tilladelse til at benytte enhedens position.
-  * requestForegroundPermissionsAsync() beder brugeren om at 'grant permissions for location',
-  * mens appen er i foreground (foreground services skal sende en notifikation)
-  * Promiset fulfilles med PermissionResponse, og hvis dette er granted,
-  * sættes værdien af locationPermission med dette resultat
-  */
+  //getLocationPermission er funktionen der spørger om tilladelse til brug af placering
+  //requestForegroundPermissionsAsync sender en efterspørgsel om tilladelse til enhedens placering.
+  //async Promiset fuldført hvis der er givet lov og PermissionResponse er givet
   const getLocationPermission = async () => {
     await Location.requestForegroundPermissionsAsync().then((item)=>{
       setlocationPermission(item.granted)
@@ -34,41 +27,31 @@ function App() {
 
   };
 
-  // useEffect kalder getlocationPermission, så vi dermed aktiverer den ovenstående funktion,
-  // der sender en forespørgsels-notifikation til brugeren vedr. tilladelse til brug af enhedens lokation
-  // Dette gøres når appen kører
+  // useEffect kalder getlocationPermission
+  // der sender en besked til brugeren og efterspørger tilladelse til at bruge enhedens lokation
   useEffect (() => {
     const response = getLocationPermission()
   });
 
-  /*
-  * Metoden updateLocation bruger det prædefinerede asynkrone kald, getCurrentPositionAsync, som returnerer enhedens aktuelle position
-  * Resultatet fra kaldet sætter værdien til vores state variabel, currentlokation.
-  * Accuracy.Balanced fortæller nøjagtigheden ved den angivne position. 
-  * Accuracy er radius for usikkerhed ved lokationen målt i meter. 
-  * Balanced tilføjer, at nøjagtigheden skal være indenfor 100 m.
-    */
+  //getCurrentPositionAsync returnerer enhedens aktuelle position
+  //Denne danne input variablen i setcurrenLocation
+  //Accuracy.Balanced giver os nøjagtighed og sætter at nøjagtigheden skal være inden for 100 meter
   const updateLocation = async () => {
     await Location.getCurrentPositionAsync({accuracy: Accuracy.Balanced}).then((item)=>{
       setCurrentLocation(item.coords)
     } );
   };
-  /*
-  * Arrow-funktionen handleLongPress tager et event, der henter værdien af et koordinatsæt
-  * Denne værdi gemmes i en variabel, der tilføjes til et array af koordinater.
-  */
+
+  //handleLongPress gør at når man klikker på et koordinat kommer den info om stedet
+  //som er sat som værdier på koordinatet
   const handleLongPress = event => {
     const coordinate = event.nativeEvent.coordinate
     setUserMarkerCoordinates((oldArray) => [...oldArray, coordinate])
   };
 
-  /*
-* Arrow-funkyionen handleSelectMarker tager det asynkrone parameter, coordinate, med som argument. 
-* Coordinate sætter værdien af vores state variabel, selectedCoordinate.
-* Så aktiveres det asynkrone kald med reverseGeocodeAsync.
-* reverseGeocodeAsync omdanner koordinatsættet til en række data, der fortæller om område og adresse.
-* selectedAddress holder så resultatet af det asynkrone kald
-*/
+
+//ReverseGeocodeAsync omdanner koordinater til en adresse som holdes af handleSelectMarker
+//Vi bruger state til at setSelectedCoordinate, med coordinates til at sætte cordinat
   const handleSelectMarker = async coordinate =>{
     setSelectedCoordinate(coordinate)
     await Location.reverseGeocodeAsync(coordinate).then((data) => {
@@ -82,10 +65,8 @@ function App() {
   const closeInfoBox = () =>
       setSelectedCoordinate(null) && setSelectedAddress(null)
 
-  // RenderCurrentLocation tager props med som argument og tjekker om, brugeren har tilladt brug af enhedens lokationsdata
-  // Hvis ikke, returneres en tekstkomponent med instruktioner til at gå til indstillinger brugeren
-  // Hvis granted og currentLocation ikke har en værdi, vil der fremvises en knap-komponent
-  //Hvis granted og currentLocation har en værdi, vil lokationsdata blive vist i en infoboks
+    // RenderCurrentLocation loader enhedens lokation og hvis der ikke er en sendes en tekst
+    //om at der ikke er givet tilladelse 
   const RenderCurrentLocation = (props) => {
     if (props.hasLocationPermission === null) {
       return null;
@@ -108,18 +89,8 @@ function App() {
     );
   };
 
-//Derudover bruger vi SafeAreaView for at sikre, at indholdet ikke overskrider grænser for enheden,
-//hvis det er en iOS version 11 eller nyere
-  /*
-  * Dernæst kaldes RenderCurrentLocation view
-  * Mapview viser et Google Maps kort, hvor brugeren via showsUserLocation kan se egen lokation. 
-  * I Mapview vises tre markører, der illustrerer lokationerne på brugerens fordele. 
-  * Hver markør har en titel e.g. SATS Falkoner og en beskrivelse e.g. 'Fitnesscenter'
-  * Alle koordinatsæt i userMarkerCoordinates ses som markører på kortet.
-  * Ved hver markør, kan brugeren aktivere metoden handleSelectMarker gennem onPress,
-  * hvormed selectedCoordinate og selectedAddres får en værdi, og der printes data om den valgte markør
-  * så brugeren kan få mere information om stedet, hvor han/hun har en frynsegode til. 
-  */
+    //nedenstående return viser google maps med de indsatte markers / markører der er placeringer
+    // på rabatudbydere.
   {
     return (
         <SafeAreaView style={styles.container}>
@@ -168,8 +139,9 @@ function App() {
   }
 }
 
+//eksporterer komponent
+export default MapComponent
 
-//----Lokal styling til ovenstående SafeAreaView
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -194,4 +166,3 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 });
-export default App

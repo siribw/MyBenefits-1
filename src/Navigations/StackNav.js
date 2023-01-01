@@ -20,6 +20,7 @@ const StackNav = () => {
         headerShown: false,
       }}
     >
+      {/* Stack screen bruger vi til at kunne swipe mellem siderne */}
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="HomeEvents" component={HomeEvents} />
       <Stack.Screen name="SingleCoupon" component={SingleCouponScreen} />
