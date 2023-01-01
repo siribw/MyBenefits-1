@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Dimensions, ScrollView, Image } from 'react-native';
-import { PieChart, BarChart } from "react-native-chart-kit";
+import { PieChart, BarChart, LineChart } from "react-native-chart-kit";
 import Globalstyles from '../Globalstyle';
 
 //fra følgende side: https://github.com/indiespirit/react-native-chart-kit
@@ -82,7 +82,7 @@ function AdminScreenComponent () {
                 />
 
                 <Text style={Globalstyles.header3}>Users on MyBenefits</Text>
-                <BarChart 
+                <LineChart 
                     //Line Chart viser hvor mange brugere der bruger appen pr. måned
                            data={{
                                //dette er labels for x aksen - så vores måneder - lav i juni alle er på sommerferie, høj i dececmber alle køber julegaver og gode fredagsbarer
@@ -93,8 +93,7 @@ function AdminScreenComponent () {
                                    }
                                ]
                            }}
-                           withVerticalLabels ={true}
-                           fromZero ={true} 
+                           
                            width={altScreenWidt} // from react-native
                            height={200}
                            chartConfig={{
@@ -111,6 +110,38 @@ function AdminScreenComponent () {
                             }}absolute
 
                 />
+                 <Text style={Globalstyles.header3}>Månedens mest benyttede samarbejdspartnere, pr. medarbejder</Text>
+                 <BarChart 
+                   //Bar Chart hvilken tilbyder af rabat der udnyttes mest
+                          data={{
+                           
+                              labels: ["Zalando", "Tryg.", "Danica", "Matas", "Illum"],
+                              datasets: [
+                                  {
+                                      data: [84, 107, 10, 25, 55]
+                                  }
+                              ]
+                          }}
+                          withVerticalLabels ={true}
+                            fromZero ={true} 
+                          width={altScreenWidt} // from react-native
+                          height={200}
+                          chartConfig={{
+                               backgroundColor: '#FFFFFF',
+                               backgroundGradientFrom: '#C4E6F7',
+                               backgroundGradientTo: '#166D99',
+                               decimalPlaces: 0, // optional, defaults to 2dp
+                               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                           }} bezier //bruges til at lave buede kanter rundt om grafen og placere den pænt
+                           style={{
+                            paddingLeft: 10,
+                            marginVertical: 8,
+                            borderRadius: 20}}
+                           absolute
+                              
+                              
+               />
 
 
 
