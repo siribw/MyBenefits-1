@@ -18,5 +18,3 @@ Demo Video:
 
 https://user-images.githubusercontent.com/70577189/210250871-3bebc7c7-c332-43a6-9e01-f6a1fc9bb936.mp4
 
-
-Fuld video
